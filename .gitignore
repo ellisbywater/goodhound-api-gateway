@@ -1,0 +1,4 @@
+pkg/config/envs/*.env
+
+# Ignore build files
+build/
