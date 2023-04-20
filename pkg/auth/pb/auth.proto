@@ -7,9 +7,10 @@ option go_package = "./pkg/auth/pb";
 service AuthService {
   rpc Register(RegisterRequest) returns (RegisterResponse) {}
   rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc RegisterAdmin(RegisterAdminRequest) returns (RegisterAdminResponse) {}
+  rpc LoginAdmin(LoginAdminRequest) returns (LoginAdminResponse) {}
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse) {}
 }
-
 
 // Register
 message RegisterRequest {
@@ -22,6 +23,18 @@ message RegisterResponse {
   string error = 2;
 }
 
+// Register Admin
+message RegisterAdminRequest {
+  string username = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message RegisterAdminResponse {
+  int64 status = 1;
+  string error = 2;
+}
+
 // Login
 
 message LoginRequest {
@@ -30,6 +43,19 @@ message LoginRequest {
 }
 
 message LoginResponse {
+  int64 status = 1;
+  string error = 2;
+  string token = 3;
+}
+
+// Login Admin
+
+message LoginAdminRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginAdminResponse {
   int64 status = 1;
   string error = 2;
   string token = 3;

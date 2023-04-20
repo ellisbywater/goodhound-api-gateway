@@ -1,0 +1,632 @@
+syntax = "proto3";
+
+package account;
+
+option go_package = "./pkg/account/pb";
+
+service AccountService {
+  // CreateOrganization creates a new organization.
+  rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse);
+
+  // GetOrganization returns the organization matching the given ID.
+  rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse);
+
+  // UpdateOrganization updates the organization matching the given ID.
+  rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse);
+
+  // DeleteOrganization deletes the organization matching the given ID.
+  rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse);
+
+  // ListOrganizations returns a list of organizations, ordered by name.
+  rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse);
+
+  // CreateTenant creates a new tenant.
+  rpc CreateTenant(CreateTenantRequest) returns (CreateTenantResponse);
+
+  // GetTenant returns the tenant matching the given ID.
+  rpc GetTenant(GetTenantRequest) returns (GetTenantResponse);
+
+  // UpdateTenant updates the tenant matching the given ID.
+  rpc UpdateTenant(UpdateTenantRequest) returns (UpdateTenantResponse);
+
+  // DeleteTenant deletes the tenant matching the given ID.
+  rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse);
+
+  // ListTenants returns a list of tenants, ordered by name.
+  rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse);
+
+  // CreateRole creates a new role.
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
+
+  // GetRole returns the role matching the given ID.
+  rpc GetRole(GetRoleRequest) returns (GetRoleResponse);
+
+  // UpdateRole updates the role matching the given ID.
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
+
+  // DeleteRole deletes the role matching the given ID.
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
+
+  // ListRoles returns a list of roles, ordered by name.
+  rpc ListRoles(ListRolesRequest) returns (ListRolesResponse);
+
+  // CreateUserGroup creates a new user group.
+  rpc CreateUserGroup(CreateUserGroupRequest) returns (CreateUserGroupResponse);
+
+  // GetUserGroup returns the user group matching the given ID.
+  rpc GetUserGroup(GetUserGroupRequest) returns (GetUserGroupResponse);
+
+  // UpdateUserGroup updates the user group matching the given ID.
+  rpc UpdateUserGroup(UpdateUserGroupRequest) returns (UpdateUserGroupResponse);
+
+  // DeleteUserGroup deletes the user group matching the given ID.
+  rpc DeleteUserGroup(DeleteUserGroupRequest) returns (DeleteUserGroupResponse);
+
+  // ListUserGroups returns a list of user groups, ordered by name.
+  rpc ListUserGroups(ListUserGroupsRequest) returns (ListUserGroupsResponse);
+
+}
+
+// CreateOrganization creates a new organization.
+message CreateOrganizationRequest {
+  string name = 1;
+  string description = 2;
+}
+message CreateOrganizationResponse {
+  string id = 1;
+}
+
+// GetOrganization returns the organization matching the given ID.
+message GetOrganizationRequest {
+  string id = 1;
+}
+
+message GetOrganizationResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+
+// UpdateOrganization updates the organization matching the given ID.
+message UpdateOrganizationRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+message UpdateOrganizationResponse {
+  string id = 1;
+}
+
+// DeleteOrganization deletes the organization matching the given ID.
+message DeleteOrganizationRequest {
+  string id = 1;
+}
+message DeleteOrganizationResponse {
+  string id = 1;
+}
+
+// ListOrganizations returns a list of organizations, ordered by name.
+message ListOrganizationsRequest {
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 1;
+}
+
+message ListOrganizationsResponse {
+  // Organization defines an organization.
+  message Organization {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // organizations defines the list of organizations.
+  repeated Organization organizations = 1;
+
+  // total_count defines the total number of organizations.
+  uint32 total_count = 2;
+}
+
+// CreateTenant creates a new tenant.
+message CreateTenantRequest {
+  string name = 1;
+  string description = 2;
+}
+message CreateTenantResponse {
+  string id = 1;
+}
+
+// GetTenant returns the tenant matching the given ID.
+message GetTenantRequest {
+  string id = 1;
+}
+
+message GetTenantResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// UpdateTenant updates the tenant matching the given ID.
+message UpdateTenantRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+message UpdateTenantResponse {
+  string id = 1;
+}
+
+// DeleteTenant deletes the tenant matching the given ID.
+message DeleteTenantRequest {
+  string id = 1;
+}
+message DeleteTenantResponse {
+  string id = 1;
+}
+
+// ListTenants returns a list of tenants, ordered by name.
+message ListTenantsRequest {
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 1;
+}
+
+message ListTenantsResponse {
+  // Tenant defines a tenant.
+  message Tenant {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // tenants defines the list of tenants.
+  repeated Tenant tenants = 1;
+
+  // total_count defines the total number of tenants.
+  uint32 total_count = 2;
+}
+
+// CreateRole creates a new role.
+message CreateRoleRequest {
+  string name = 1;
+  string description = 2;
+}
+message CreateRoleResponse {
+  string id = 1;
+}
+
+// GetRole returns the role matching the given ID.
+message GetRoleRequest {
+  string id = 1;
+}
+
+message GetRoleResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// UpdateRole updates the role matching the given ID.
+message UpdateRoleRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateRoleResponse {
+  string id = 1;
+}
+
+// DeleteRole deletes the role matching the given ID.
+message DeleteRoleRequest {
+  string id = 1;
+}
+message DeleteRoleResponse {
+  string id = 1;
+}
+
+// ListRoles returns a list of roles, ordered by name.
+message ListRolesRequest {
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 1;
+}
+
+message ListRolesResponse {
+  // Role defines a role.
+  message Role {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // roles defines the list of roles.
+  repeated Role roles = 1;
+
+  // total_count defines the total number of roles.
+  uint32 total_count = 2;
+}
+
+// CreateUserGroup creates a new user group.
+message CreateUserGroupRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateUserGroupResponse {
+  string id = 1;
+}
+
+// GetUserGroup returns the user group matching the given ID.
+
+message GetUserGroupRequest {
+  string id = 1;
+}
+
+message GetUserGroupResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// UpdateUserGroup updates the user group matching the given ID.
+message UpdateUserGroupRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateUserGroupResponse {
+  string id = 1;
+}
+
+// DeleteUserGroup deletes the user group matching the given ID.
+message DeleteUserGroupRequest {
+  string id = 1;
+}
+message DeleteUserGroupResponse {
+  string id = 1;
+}
+
+// ListUserGroups returns a list of user groups, ordered by name.
+message ListUserGroupsRequest {
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 1;
+}
+
+message ListUserGroupsResponse {
+  // UserGroup defines a user group.
+  message UserGroup {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // user_groups defines the list of user groups.
+  repeated UserGroup user_groups = 1;
+
+  // total_count defines the total number of user groups.
+  uint32 total_count = 2;
+}
+
+
+// AddUserGroupMembers adds users to a user group.
+message AddUserGroupMembersRequest {
+  string user_group_id = 1;
+  repeated string user_ids = 2;
+}
+
+message AddUserGroupMembersResponse {
+  string user_group_id = 1;
+  repeated string user_ids = 2;
+}
+
+// RemoveUserGroupMembers removes users from a user group.
+message RemoveUserGroupMembersRequest {
+  string user_group_id = 1;
+  repeated string user_ids = 2;
+}
+
+message RemoveUserGroupMembersResponse {
+  string user_group_id = 1;
+  repeated string user_ids = 2;
+}
+
+// ListUserGroupMembers returns a list of users in a user group.
+message ListUserGroupMembersRequest {
+  string user_group_id = 1;
+
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 2;
+}
+
+message ListUserGroupMembersResponse {
+  // User defines a user.
+  message User {
+    string id = 1;
+    string name = 2;
+    string email = 3;
+  }
+
+  // users defines the list of users.
+  repeated User users = 1;
+
+  // total_count defines the total number of users.
+  uint32 total_count = 2;
+}
+
+// AddUserGroupRoles adds roles to a user group.
+message AddUserGroupRolesRequest {
+  string user_group_id = 1;
+  repeated string role_ids = 2;
+}
+
+message AddUserGroupRolesResponse {
+  string user_group_id = 1;
+  repeated string role_ids = 2;
+}
+
+// RemoveUserGroupRoles removes roles from a user group.
+message RemoveUserGroupRolesRequest {
+  string user_group_id = 1;
+  repeated string role_ids = 2;
+}
+
+message RemoveUserGroupRolesResponse {
+  string user_group_id = 1;
+  repeated string role_ids = 2;
+}
+
+// ListUserGroupRoles returns a list of roles in a user group.
+message ListUserGroupRolesRequest {
+  string user_group_id = 1;
+
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 2;
+}
+
+message ListUserGroupRolesResponse {
+  // Role defines a role.
+  message Role {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // roles defines the list of roles.
+  repeated Role roles = 1;
+
+  // total_count defines the total number of roles.
+  uint32 total_count = 2;
+}
+
+// AddPermissions adds permissions to a role.
+message AddPermissionsRequest {
+  string role_id = 1;
+  repeated string permission_ids = 2;
+}
+
+message AddPermissionsResponse {
+  string role_id = 1;
+  repeated string permission_ids = 2;
+}
+
+// RemovePermissions removes permissions from a role.
+message RemovePermissionsRequest {
+  string role_id = 1;
+  repeated string permission_ids = 2;
+}
+
+message RemovePermissionsResponse {
+  string role_id = 1;
+  repeated string permission_ids = 2;
+}
+
+// ListPermissions returns a list of permissions in a role.
+message ListPermissionsRequest {
+  string role_id = 1;
+
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 2;
+}
+
+message ListPermissionsResponse {
+  // Permission defines a permission.
+  message Permission {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // permissions defines the list of permissions.
+  repeated Permission permissions = 1;
+
+  // total_count defines the total number of permissions.
+  uint32 total_count = 2;
+}
+
+// Create TenantRole creates a new tenant role.
+message CreateTenantRoleRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CreateTenantRoleResponse {
+  string id = 1;
+}
+
+// GetTenantRole returns the tenant role matching the given ID.
+message GetTenantRoleRequest {
+  string id = 1;
+}
+
+message GetTenantRoleResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// UpdateTenantRole updates the tenant role matching the given ID.
+message UpdateTenantRoleRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message UpdateTenantRoleResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+// DeleteTenantRole deletes the tenant role matching the given ID.
+message DeleteTenantRoleRequest {
+  string id = 1;
+}
+
+message DeleteTenantRoleResponse {
+  string id = 1;
+}
+
+// ListTenantRoles returns a list of tenant roles.
+message ListTenantRolesRequest {
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 1;
+}
+
+message ListTenantRolesResponse {
+  // TenantRole defines a tenant role.
+  message TenantRole {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+  }
+
+  // tenant_roles defines the list of tenant roles.
+  repeated TenantRole tenant_roles = 1;
+
+  // total_count defines the total number of tenant roles.
+  uint32 total_count = 2;
+}
+
+// AddTenantRoleMembers adds users to a tenant role.
+message AddTenantRoleMembersRequest {
+  string tenant_role_id = 1;
+  repeated string user_ids = 2;
+}
+
+message AddTenantRoleMembersResponse {
+  string tenant_role_id = 1;
+  repeated string user_ids = 2;
+}
+
+// RemoveTenantRoleMembers removes users from a tenant role.
+message RemoveTenantRoleMembersRequest {
+  string tenant_role_id = 1;
+  repeated string user_ids = 2;
+}
+
+message RemoveTenantRoleMembersResponse {
+  string tenant_role_id = 1;
+  repeated string user_ids = 2;
+}
+
+// ListTenantRoleMembers returns a list of users in a tenant role.
+message ListTenantRoleMembersRequest {
+  string tenant_role_id = 1;
+
+  // Page defines the pagination settings.
+  message Page {
+    // Limit defines the maximum number of items to return.
+    // If zero, no limit is applied.
+    uint32 limit = 1;
+
+    // Offset defines the number of items to skip.
+    uint32 offset = 2;
+  }
+
+  // page defines the pagination settings.
+  Page page = 2;
+}
+
+
+
